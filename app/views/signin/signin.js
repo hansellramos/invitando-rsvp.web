@@ -1,15 +1,15 @@
 'use strict';
  
-angular.module('App.login', ['ngRoute'])
+angular.module('App.signin', ['ngRoute'])
  
 .config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/login', {
-        templateUrl: 'views/login/login.html',
-        controller: 'LoginCtrl'
+	$routeProvider.when('/signin', {
+        templateUrl: 'views/signin/signin.html',
+        controller: 'SignInCtrl'
     });
 }])
  
-.controller('LoginCtrl', ['$scope', 'Flash', 'AuthService', function($scope, Flash, AuthService) {
+.controller('SignInCtrl', ['$scope', 'Flash', 'AuthService', function($scope, Flash, AuthService) {
 	$scope.user = {email:'hansell.ramos@gmail.com', password:''};
 
 	$scope.SignIn = function(event) {

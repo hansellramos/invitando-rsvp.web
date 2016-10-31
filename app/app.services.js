@@ -20,4 +20,15 @@ angular.module('App.auth',[])
 		}
 	};
 }])
+.factory('UserService', ['firebase', function(firebase){
+	var database = firebase.database();
+	return {
+		add: function(user){
+			return database.ref('Users'+user.uid)
+					.set({
+						fullname: user.fullname
+					});
+		}
+	};
+}])
 ;

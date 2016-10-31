@@ -5,6 +5,14 @@ a, a:link, a:hover{
 a:hover{
 	opacity: 0.9;
 }
+h2, h2.font{
+	color: #54b75a;
+	font-size: 30px;
+}
+hr{
+	border-top-color: #54b75a;
+	opacity: 0.7;
+}
 .logo{
 	width: 128px;
 	height: 128px;
@@ -45,6 +53,9 @@ a:hover{
 .no-border{
 	border: none;
 }
+.btn-link, .btn-link:focus, .btn-link:hover{
+	color: #54b75a;
+}
 .btn-social.twitter:hover{
 	background: #00aced;
 	color: #fff;
@@ -72,24 +83,29 @@ a:hover{
 .btn-social:hover{
 	color: #fff;
 }
-.btn-primary{
+.btn-primary
+, .btn-primary:hover
+, .btn-primary[disabled]
+, .btn-primary[disabled]:hover
+, .btn-primary:focus{
 	background-color: #54b75a;
 }
-.btn-primary:hover{
-	background-color: #54b75a;
+.btn-primary:hover
+, .btn-primary:focus{
 	opacity: 0.9;
 }
-.btn-primary[disabled]{
-	background-color: #54b75a;
-	opacity: 0.7;
-}
 .btn-primary[disabled]:hover{
-	background-color: #54b75a;
 	opacity: 0.8;
+}
+.btn-primary[disabled]{
+	opacity: 0.7;
 }
 .animate{
 	-webkit-transition: all 0.5s ease;
   	-moz-transition: all 0.5s ease;
   	-o-transition: all 0.5s ease;
   	transition: all 0.5s ease;
+}
+.form-signin input[type="email"]{
+	margin-bottom: 10px !important;
 }

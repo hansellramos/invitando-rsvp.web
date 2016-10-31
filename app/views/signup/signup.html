@@ -1,0 +1,44 @@
+<div ng-controller="SignUpCtrl">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+ 
+    <div class="container">
+        <div class="jumbotron" style="padding-bottom:0px;">
+            <div class="logo">
+                <label class="font">Invitando</label>
+            </div>
+            <h2 class="font">Sign Up</h2>
+        </div>
+        <flash-message duration="5000" show-close="true"></flash-message>
+        <form class="form-signin" role="form" name="signupForm">
+            <div class="form-group" ng-class="{ 'has-error' : signupForm.fullname.$invalid }">
+                <label class="font">Fullname</label>
+                <input type="text" ng-model="user.fullname" name="fullname" class="form-control" required="" autofocus="" ng-minlength="2">
+                <p class="error font animate" ng-show="signupForm.fullname.$error.minlength">Min length is 2 characters.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid }">
+                <label class="font">Email</label>
+                <input type="email" ng-model="user.email" name="email" class="form-control" required="" autofocus="">
+                <p class="error font" ng-show="signupForm.email.$invalid">Enter a valid email.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : signupForm.password.$invalid }">
+                <label class="font">Password</label>
+                <input type="password" ng-model="user.password" name="password" class="form-control" required="" ng-minlength="6">
+                <p class="error font" ng-show="signupForm.password.$error.minlength">Min password length is 6 characters.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : signupForm.repeatPassword.$invalid }">
+                <label class="font">Repeat Password</label>
+                <input type="password" ng-model="user.repeatPassword" name="repeatPassword" class="form-control" required="" compare-to="user.password">
+                <p class="error font" ng-show="signupForm.repeatPassword.$invalid">Passwords must be same.</p>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-primary animate no-border font" ng-disabled='signupForm.$invalid' ng-click="SignUp($event)" type="button">Sign Up</button>
+            <a href="#/singin" class="btn btn-link btn-block font"> Sign In</a>
+            <hr />
+            <div class="center font">
+                Or sign in using <br />
+                <button type="button" class="btn btn-link btn-social facebook animate"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-link btn-social twitter animate"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-link btn-social google animate"><i class="fa fa-google fa-2x" aria-hidden="true"></i></button>
+            </div>
+        </form>
+    </div> 
+</div>
