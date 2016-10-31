@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="App" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="App" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="App" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="App" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Invitando RSVP</title>
+  <meta name="description" content="Invitando RSVP">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+
+  <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.min.css">
+
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Pacifico" rel="stylesheet">
+
+
+  <link href="justified-nav.css" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+<body>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div ng-view></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+
+  <script src="bower_components/angular-flash-alert/dist/angular-flash.min.js"></script>
+
+
+  
+  <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyA-YFERNQrX-yFS81Wlb1L25VUegX9snSA",
+      authDomain: "invitando-rsvp.firebaseapp.com",
+      databaseURL: "https://invitando-rsvp.firebaseio.com",
+      storageBucket: "invitando-rsvp.appspot.com",
+      messagingSenderId: "171911735113"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+
+  <!-- Main App -->
+  <script src="app.js"></script>
+  
+  <!-- Main Modules -->
+  <script src="app.services.js"></script>
+
+  <!-- App Modules-->
+  <script src="views/login/login.js"></script>
+  <script src="views/register/register.js"></script>
+
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>
