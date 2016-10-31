@@ -17,8 +17,11 @@ angular.module('App.signin', ['ngRoute'])
 		// Auth Logic will be here
 	    AuthService.login($scope.user)
 	    .then(function(user){
-	    	debugger;
-	    	Flash.create('success','Authentication successful');
+	    	if(user.emailVerified){
+	    		Flash.create('success','Authentication successful');	
+	    	}else{
+	    		Flash.create('warning','Your email has not been validated, please check, validate and try again.');	
+	    	}
 	    })
 	    .catch(function(error){
 	    	Flash.create('danger', 'Error: '+error.message);

@@ -4,9 +4,10 @@ angular.module('App', [
  'ngRoute'
 ,'ngFlash'
 ,'firebase'
-,    'App.auth' 
+,    'App.services' 
 ,    'App.signin'
-,    'App.signup' 
+,    'App.signup'
+,    'App.home' 
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({

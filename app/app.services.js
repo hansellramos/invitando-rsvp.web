@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('App.auth',[])
+angular.module('App.services',[])
 .factory('AuthService', ['$firebaseAuth', function($firebaseAuth){
 	var firebaseAuthObject = $firebaseAuth();
 	return {

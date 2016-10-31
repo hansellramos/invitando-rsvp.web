@@ -5,10 +5,13 @@ a, a:link, a:hover{
 a:hover{
 	opacity: 0.9;
 }
-h2, h2.font{
-	color: #54b75a;
-	font-size: 30px;
-}
+h1, h2, h3, h4, h5, h6{color: #54b75a;}
+h1.font{font-size: 36px;}
+h2.font{font-size: 30px;}
+h3.font{font-size: 24px;}
+h4.font{font-size: 18px;}
+h5.font{font-size: 14px;}
+h6.font{font-size: 10px;}
 hr{
 	border-top-color: #54b75a;
 	opacity: 0.7;
@@ -56,21 +59,24 @@ hr{
 .btn-link, .btn-link:focus, .btn-link:hover{
 	color: #54b75a;
 }
-.btn-social.twitter:hover{
+.btn-social.twitter:hover
+, .btn-social.twitter:focus{
 	background: #00aced;
 	color: #fff;
 }
 .twitter{
 	color: #00aced;
 }
-.btn-social.facebook:hover{
+.btn-social.facebook:hover
+, .btn-social.facebook:focus{
 	background: #3b5998;
 	color: #fff;
 }
 .facebook{
 	color: #3b5998;
 }
-.btn-social.google:hover {
+.btn-social.google:hover
+, .btn-social.google:focus {
 	background: #dd4b39;
 	color: #fff;
 }
@@ -109,3 +115,39 @@ hr{
 .form-signin input[type="email"]{
 	margin-bottom: 10px !important;
 }
+.navbar-inverse {
+    background-color: #54b75a;
+    border-color: #54b75a;
+}
+.navbar-inverse .navbar-brand
+, .navbar-inverse .navbar-brand:focus
+, .navbar-inverse .navbar-brand:hover
+{
+	color: #fff !important;
+}
+.navbar-inverse .navbar-nav>li>a
+{
+	color: #fff !important;
+}
+.navbar-inverse .navbar-toggle
+, .navbar-inverse .navbar-collapse
+, .navbar-inverse .navbar-form{
+	border-color: #fff;
+}
+.navbar-inverse .navbar-toggle:hover{
+	background: #fff;
+}
+.navbar-inverse .navbar-toggle:hover .icon-bar{
+	background: #54b75a;
+}
+.bs{box-sizing: border-box;}
+.p-lg{ padding: 32px; }
+.p-md{ padding: 16px; }
+.p-sm{ padding: 8px; }
+.p-xs{ padding: 4px; }
+.p-xxs{ padding: 2px; }
+.m-lg{ margin: 32px; }
+.m-md{ margin: 16px; }
+.m-sm{ margin: 8px; }
+.m-xs{ margin: 4px; }
+.m-xxs{ margin: 2px; }
