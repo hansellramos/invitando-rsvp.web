@@ -20,15 +20,29 @@ angular.module('App.services',[])
 		}
 	};
 }])
-.factory('UserService', ['firebase', function(firebase){
+.factory('UserService', ['firebase', '$firebaseObject', function(firebase, $firebaseObject){
 	var database = firebase.database();
 	return {
 		add: function(user){
-			return database.ref('Users'+user.uid)
+			return database.ref('Users/'+user.uid)
 					.set({
 						fullname: user.fullname
 					});
 		}
+		, get: function(uid){
+			return $firebaseObject(database.ref('Users/'+uid));
+		}
 	};
+}])
+.service('Common', [function(){
+	var user = {};
+	return {
+		getUser: function(){
+			return user;
+		}
+		, setUser: function(value){
+			user = value;
+		}
+	}
 }])
 ;

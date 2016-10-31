@@ -9,7 +9,7 @@ angular.module('App.signin', ['ngRoute'])
     });
 }])
  
-.controller('SignInCtrl', ['$scope', 'Flash', 'AuthService', function($scope, Flash, AuthService) {
+.controller('SignInCtrl', ['$scope', '$location', 'Flash', 'AuthService', 'UserService', 'Common', function($scope, $location, Flash, AuthService, UserService, Common) {
 	$scope.user = {email:'hansell.ramos@gmail.com', password:''};
 
 	$scope.SignIn = function(event) {
@@ -18,7 +18,15 @@ angular.module('App.signin', ['ngRoute'])
 	    AuthService.login($scope.user)
 	    .then(function(user){
 	    	if(user.emailVerified){
-	    		Flash.create('success','Authentication successful');	
+	    		var s = UserService.get(user.uid)
+	    		//.then(function(data){
+	    		//	;
+	    		//	debugger;
+	    		//});
+	    		//Common.setUser(data.val())
+	    		//s$bindTo($scope, )
+	    		$location.path("/home");
+	    		//Flash.create('success','Authentication successful');	
 	    	}else{
 	    		Flash.create('warning','Your email has not been validated, please check, validate and try again.');	
 	    	}
