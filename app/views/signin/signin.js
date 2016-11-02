@@ -9,8 +9,8 @@ angular.module('App.signin', ['ngRoute'])
     });
 }])
  
-.controller('SignInCtrl', ['$scope', '$location', 'Flash', 'AuthService', 'UserService', 'Common', function($scope, $location, Flash, AuthService, UserService, Common) {
-	$scope.user = {email:'hansell.ramos@gmail.com', password:''};
+.controller('SignInCtrl', ['$scope', '$location', '$timeout', 'Flash', 'Common', 'AuthService', 'UserService', function($scope, $location, $timeout, Flash, Common, AuthService, UserService) {
+	$scope.user = {email:'', password:''};
 
 	$scope.SignIn = function(event) {
 		event.preventDefault();
@@ -18,13 +18,6 @@ angular.module('App.signin', ['ngRoute'])
 	    AuthService.login($scope.user)
 	    .then(function(user){
 	    	if(user.emailVerified){
-	    		var s = UserService.get(user.uid)
-	    		//.then(function(data){
-	    		//	;
-	    		//	debugger;
-	    		//});
-	    		//Common.setUser(data.val())
-	    		//s$bindTo($scope, )
 	    		$location.path("/home");
 	    		//Flash.create('success','Authentication successful');	
 	    	}else{
@@ -35,4 +28,50 @@ angular.module('App.signin', ['ngRoute'])
 	    	Flash.create('danger', 'Error: '+error.message);
 	    })
 	}
+
+	$scope.SignInWIthFacebook = function(){
+		AuthService.loginWIthFacebook(function(user){
+			if(!user || !user.uid) return false;
+			UserService.add({
+				uid: user.uid,
+				fullname: user.displayName,
+				email: user.email
+			}).then(function(user){
+				Flash.create('success','Authentication successful, redirecting...');	
+				$location.path("/home");
+			}).catch(function(error){
+				Flash.create('danger', 'Error: '+error.message);
+			});
+		})
+		.catch(function(error){
+			Flash.create('danger', 'Error: '+error.message);
+		})
+	}
+
+	$scope.SignInWIthGoogle = function(){
+		AuthService.loginWIthGoogle(function(user){
+			if(!user || !user.uid) return false;
+			UserService.add({
+				uid: user.uid,
+				fullname: user.email.substr(0, user.email.search("@")),
+				email: user.email
+			}).then(function(user){
+				Flash.create('success','Authentication successful, redirecting...');	
+				$location.path("/home");
+			}).catch(function(error){
+				Flash.create('danger', 'Error: '+error.message);
+			});
+		})
+		.catch(function(error){
+			Flash.create('danger', 'Error: '+error.message);
+		})
+	}
+
+	$scope.init = function(){
+		Common.redirectIfLoggedIn();
+	}
+
+	$timeout(function(){
+		$scope.init();
+	},500);
 }]);

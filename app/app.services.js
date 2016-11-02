@@ -1,13 +1,23 @@
 'use strict';
 
 angular.module('App.services',[])
-.factory('AuthService', ['$firebaseAuth', function($firebaseAuth){
-	var firebaseAuthObject = $firebaseAuth();
+.factory('AuthService', ['firebase','$firebaseAuth', function(firebase, $firebaseAuth){
+	var firebaseAuthObject = $firebaseAuth(firebase.auth());
 	return {
 		firebaseAuthObject: firebaseAuthObject
 		, login: function(user){
 			return firebaseAuthObject
 					.$signInWithEmailAndPassword(user.email, user.password);
+		}
+		, loginWIthFacebook: function(cb){
+			firebaseAuthObject.$onAuthStateChanged(cb);
+			return firebaseAuthObject
+					.$signInWithPopup("facebook");
+		}
+		, loginWIthGoogle: function(cb){
+			firebaseAuthObject.$onAuthStateChanged(cb);
+			return firebaseAuthObject
+					.$signInWithPopup("google");
 		}
 		, logout: function(){
 			firebaseAuthObject.$signOut();
@@ -17,6 +27,8 @@ angular.module('App.services',[])
 		}
 		, isLoggedIn: function(){
 			return firebaseAuthObject.$getAuth();
+		}, test: function(){
+			return firebaseAuthObject;
 		}
 	};
 }])
@@ -24,17 +36,17 @@ angular.module('App.services',[])
 	var database = firebase.database();
 	return {
 		add: function(user){
-			return database.ref('Users/'+user.uid)
-					.set({
-						fullname: user.fullname
-					});
+			var _user = $firebaseObject(database.ref('Users/'+user.uid));
+			if(user.fullname) {_user.fullname = user.fullname;}
+			_user.email = user.email;
+			return _user.$save();
 		}
 		, get: function(uid){
 			return $firebaseObject(database.ref('Users/'+uid));
 		}
 	};
 }])
-.service('Common', [function(){
+.service('Common', ['$location', 'AuthService', function($location, AuthService){
 	var user = {};
 	return {
 		getUser: function(){
@@ -42,6 +54,18 @@ angular.module('App.services',[])
 		}
 		, setUser: function(value){
 			user = value;
+		}, redirectIfLoggedIn: function(){
+			if(AuthService.isLoggedIn()){
+				$location.path("/home");
+				return true;
+			}
+			return false;
+		}, redirectIfNotLoggedIn: function(){
+			if(!AuthService.isLoggedIn()){
+				$location.path("/signin");
+				return true;
+			}
+			return false;
 		}
 	}
 }])
