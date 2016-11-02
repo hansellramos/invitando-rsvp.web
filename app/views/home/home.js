@@ -28,9 +28,9 @@ angular.module('App.home',['ngRoute'])
 	$scope.other = function(){
 		$scope.user = {f:new Date()};
 	}
-	//$timeout(function(){
+	$timeout(function(){
 		$scope.init();
-		//},1000);
+	},500);
 
 	}])
 ;
