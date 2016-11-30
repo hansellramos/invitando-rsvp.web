@@ -4,21 +4,14 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 
-gulp.task('default',['hello','world']);
-
-gulp.task('hello', function(cb){
-    setTimeout(function(){
-        console.log("Hello");
-        cb();
-    },2000)
-});
-
-gulp.task('world', ['hello'], function(){
-    console.log("world")
-});
+gulp.task('default',['sass']);
 
 gulp.task('sass',function(){
     return gulp.src('src/sass/app.scss')
         .pipe(sass())
         .pipe(gulp.dest('app/'))
+});
+
+gulp.task('watch',function(){
+    gulp.watch('src/sass/*.scss',['sass']);
 });
