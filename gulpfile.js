@@ -7,6 +7,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var uglify = require('gulp-uglify');
 
 gulp.task('default',['sass']);
 
@@ -27,6 +28,18 @@ gulp.task('sass:prod',function(){
         .pipe(gulp.dest('app/dist/'))
 });
 
+gulp.task('js:prod',function(){
+    return gulp.src('app/*.js')
+        .pipe(uglify({compress:true}))
+        .pipe(gulp.dest('app/dist'))
+});
+
+gulp.task('css:prod',function(){
+    return gulp.src('app/*.css')
+        .pipe(uglify({compress:true})).on('error')
+        .pipe(gulp.dest('app/dist'))
+});
+
 gulp.task('watch',function(){
     gulp.watch('src/sass/*.scss',['sass']);
 });
@@ -40,4 +53,4 @@ gulp.task('serve',['sass'],function(){
     gulp.start('watch');
 });
 
-gulp.task('build', ['sass:prod']);
+gulp.task('build', ['sass:prod', 'js:prod']);
