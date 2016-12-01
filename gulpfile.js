@@ -8,13 +8,15 @@ var reload = browserSync.reload;
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
+var plumber = require('gulp-plumber');
 
 gulp.task('default',['sass']);
 
 gulp.task('sass',function(){
     return gulp.src('src/sass/app.scss')
+        .pipe(plumber())
         .pipe(sourcemaps.init())
-        .pipe(sass()).on('error', sass.logError)
+        .pipe(sass())
         .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('app/'))
@@ -23,20 +25,23 @@ gulp.task('sass',function(){
 
 gulp.task('sass:prod',function(){
     return gulp.src('src/sass/app.scss')
-        .pipe(sass({ outputStyle: 'compressed'})).on('error', sass.logError)
+        .pipe(plumber())
+        .pipe(sass({ outputStyle: 'compressed'}))
         .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
         .pipe(gulp.dest('app/dist/'))
 });
 
 gulp.task('js:prod',function(){
     return gulp.src('app/*.js')
+        .pipe(plumber())
         .pipe(uglify({compress:true}))
         .pipe(gulp.dest('app/dist'))
 });
 
 gulp.task('css:prod',function(){
     return gulp.src('app/*.css')
-        .pipe(uglify({compress:true})).on('error')
+        .pipe(plumber())
+        .pipe(uglify({compress:true}))
         .pipe(gulp.dest('app/dist'))
 });
 
